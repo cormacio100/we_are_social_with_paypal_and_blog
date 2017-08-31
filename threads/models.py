@@ -18,6 +18,12 @@ THREAD MODEL
 -   Then in accounts.User model the thread is accessible as the user.threads field in the process
 of creating a Relationship. So even though we're not editing the accounts.User model directly,
 we are modifying its relationship by specifying them in our new models
+
+-   You must be an admin to create a subject via the admin screen
+-   A subject can have zero or more topic threads associated with it
+-   A thread can be commented on in the form of zero or more posts
+-   You must be logged in to create a thread or a post
+
 """
 
 from django.db import models
