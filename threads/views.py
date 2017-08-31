@@ -6,15 +6,17 @@ from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.template.context_processors import csrf
+from django.shortcuts import render
+from threads.models import Subject
 
 
 def forum(request):
-    return render(request,'forum/forum.html',{'subjects':Subject.object.all()})
+    return render(request, 'forum/forum.html', {'subjects': Subject.objects.all()})
 
 
 def threads(request,subject_id):
     subject = get_object_or_404(Subject, pk=subject_id)
-    return render(request,'forum/threads.html',{'subject':subject})
+    return render(request,'forum/threads.html',{'subject': subject})
 
 
 @login_required
