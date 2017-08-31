@@ -21,6 +21,7 @@ from paypal_store import views as paypal_views
 from products import views as product_views
 from magazines import views as magazine_views
 from accounts.views import register, profile, login, logout, cancel_subscription, subscriptions_webhook
+from threads import views as forum_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -46,4 +47,16 @@ urlpatterns = [
 
     # Blog URLs
     url(r'^blog/', include('reusable_blog.urls')),
+
+    # Thread URLs
+    url(r'^forum/$',forum_views.forum),
+    url(r'^threads/(?P<subject_id>\d+)/$', forum_views.threads,name='threads'),
+    url(r'^new_thread/(?P<subject_id>\d+)/$', forum_views.new_thread, name='new_thread')
 ]
+
+from django.conf import settings
+from django.conf.urls import include, url
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns.append(url(r'^debug/',include(debug_toolbar.urls)))

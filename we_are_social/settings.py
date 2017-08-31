@@ -40,15 +40,21 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django_forms_bootstrap',
+    'paypal.standard.ipn',
+    'debug_toolbar',
+    'tinymce',
+    'emoticons',
     'disqus',
     'reusable_blog',
     'home',
     'accounts',
     'paypal_store',
     'products',
-    'paypal.standard.ipn',
     'magazines',
+    'threads',
 ]
+
+INTERNAL_IPS = ('127.0.0.1',)
 
 AUTH_USER_MODEL = 'accounts.User'
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
@@ -66,6 +72,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'we_are_social.urls'
@@ -138,10 +145,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = ''
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static"), # static directory at the project level
 )
+
+# tinymce settings
+TINYMCE_JS_ROOT = os.path.join(BASE_DIR,"static","js","tinymce","tinymce.min.js")
 
 '''# Stripe environment variables
 STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE', '<replace this with your stripe publishable code>')
