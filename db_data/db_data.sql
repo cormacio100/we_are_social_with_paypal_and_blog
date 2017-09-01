@@ -1,4 +1,36 @@
 BEGIN TRANSACTION;
+INSERT INTO `threads_thread` (id,name,created_at,subject_id,user_id) VALUES (1,'How to get your music played in movies','2017-09-01 16:38:46.904000',12,2),
+ (2,'What''s your favourite painting and why?','2017-09-01 16:44:21.356000',5,2),
+ (3,'How much is that doggy in the window?','2017-09-01 21:04:18.380000',6,2),
+ (4,'Anyone play on a ZX Spectrum +','2017-09-01 22:12:45.343000',7,2),
+ (5,'Is it back to school already?','2017-09-01 22:14:48.206000',8,2),
+ (6,'What''s on TV tonight','2017-09-01 23:15:01.766000',9,2);
+INSERT INTO `threads_subject` (id,name,description) VALUES (5,'Arts','<p>.</p>'),
+ (6,'Business & Finance','<p>.</p>'),
+ (7,'Computer Games','<p>.</p>'),
+ (8,'Education','<p>.</p>'),
+ (9,'Entertainment','<p>.</p>'),
+ (10,'Home & Garden','<p>.</p>'),
+ (11,'Motor & Transport','<p>.</p>'),
+ (12,'Music','<p>.</p>'),
+ (13,'Politics','<p>.</p>'),
+ (14,'Recreation & Hobbies','<p>.</p>'),
+ (15,'Science, Health & Environment','<p>.</p>'),
+ (16,'Social & Fun','<p>.</p>'),
+ (17,'Society & Culture','<p>.</p>'),
+ (18,'Sports','<p>.</p>'),
+ (19,'Technology & Internet','<p>.</p>');
+INSERT INTO `threads_post` (id,comment,created_at,thread_id,user_id) VALUES (1,'<p>Write, Rehearse, Record, Release</p>
+<p>Also do an instrumental version&nbsp;</p>
+<p>Then submit</p>','2017-09-01 16:38:46.904000',1,2),
+ (2,'<p>The Scream by Edvard Munch</p>
+<p>I just like the lines</p>
+<p>And I also did a version of it for Art class</p>','2017-09-01 16:44:21.357000',2,2),
+ (3,'<p>the one with the waggedy tail</p>','2017-09-01 21:04:18.380000',3,2),
+ (4,'<p>In my childhood</p>','2017-09-01 22:12:45.344000',4,2),
+ (5,'<p>yes</p>','2017-09-01 22:14:48.212000',5,2),
+ (6,'I believe it is yes','2017-09-01 22:36:07.288000',5,2),
+ (8,'Also the Bachelor','2017-09-01 23:15:27.591000',6,2);
 INSERT INTO `reusable_blog_post` (id,title,content,created_date,published_date,views,author_id,image,tag) VALUES (1,'post1','Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.','2017-08-31 14:17:43','2017-08-31 14:18:29',0,1,'images/150_EURO.JPG','IT'),
  (2,'post2','It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ''Content here, content here'', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for ''lorem ipsum'' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).','2017-08-31 14:19:10','2017-08-31 14:19:29',5,1,'images/400_EURO.JPG','health'),
  (3,'post3','There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don''t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn''t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.','2017-08-31 14:19:45','2017-08-31 14:20:06',6,1,'images/600_EURO.JPG','music'),
@@ -20,7 +52,8 @@ INSERT INTO `magazines_magazine` (id,name,description,price) VALUES (1,'mag1','M
  (3,'mag3','mag3',9.99),
  (4,'mag4','mag4',10.99);
 INSERT INTO `django_site` (id,domain,name) VALUES (2,'example.com','example.com');
-INSERT INTO `django_session` (session_key,session_data,expire_date) VALUES ('m4e4xyj56wasbhhkg7o11h2kewoxdmkv','NTc3MDU0Y2VjOTMzZmUyNGJjOGE4ZmIzN2YzZjljNGI1NmUyOTAyODp7Il9hdXRoX3VzZXJfaGFzaCI6IjA2YjBmMDRkM2FlZmM4ZWZhZWE5MjVmM2YzYTA1YTgzODdkMTY2Y2UiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=','2017-09-14 22:51:45.251000');
+INSERT INTO `django_session` (session_key,session_data,expire_date) VALUES ('m4e4xyj56wasbhhkg7o11h2kewoxdmkv','NTc3MDU0Y2VjOTMzZmUyNGJjOGE4ZmIzN2YzZjljNGI1NmUyOTAyODp7Il9hdXRoX3VzZXJfaGFzaCI6IjA2YjBmMDRkM2FlZmM4ZWZhZWE5MjVmM2YzYTA1YTgzODdkMTY2Y2UiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=','2017-09-14 22:51:45.251000'),
+ ('nv597ulml9f32doao8cj4p6tjt2m04cc','MGNiOGUwOTIwOTNkYWYzNDQ4NTE0MjMwOTA1ZTNmNjE5Mzc0ZTg5Njp7Il9hdXRoX3VzZXJfaGFzaCI6ImUzYzNjZDY5M2M3NWQxZjE2OTczNTNiNTJkOTU0NGU5YjZjMTM2NGYiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJhY2NvdW50cy5iYWNrZW5kcy5FbWFpbEF1dGgiLCJfYXV0aF91c2VyX2lkIjoiMiJ9','2017-09-14 23:05:04.458000');
 INSERT INTO `django_migrations` (id,app,name,applied) VALUES (1,'contenttypes','0001_initial','2017-08-31 14:08:18.012000'),
  (2,'contenttypes','0002_remove_content_type_name','2017-08-31 14:08:18.211000'),
  (3,'auth','0001_initial','2017-08-31 14:08:18.464000'),
@@ -154,5 +187,5 @@ INSERT INTO `auth_permission` (id,content_type_id,codename,name) VALUES (1,1,'ad
  (47,16,'change_post','Can change post'),
  (48,16,'delete_post','Can delete post');
 INSERT INTO `accounts_user` (id,password,last_login,is_superuser,username,first_name,last_name,email,is_staff,is_active,date_joined,stripe_id,subscription_end) VALUES (1,'pbkdf2_sha256$20000$mvurxzavD8cv$L4PaiSwg4cGtLUKOWHVKxjhwXyRWc+TzStDDf6n3Wes=','2017-08-31 22:51:45.062000',1,'cormac.liston@outlook.com','','','cormac.liston@outlook.com',1,1,'2017-08-31 14:11:29.414000','','2017-08-31 14:11:29.414000'),
- (2,'pbkdf2_sha256$20000$A4sowmqnPEdN$bX/s7/aMj1dbK8/k2C4ZptSr/FZZavviElhgnBgDXkc=','2017-08-31 15:06:19.025000',0,'cormac74s@gmail.com','','','cormac74s@gmail.com',0,1,'2017-08-31 14:33:27.799000','cus_BJWnK0YvIKLRCN','2017-09-28 14:33:30.579000');
+ (2,'pbkdf2_sha256$20000$A4sowmqnPEdN$bX/s7/aMj1dbK8/k2C4ZptSr/FZZavviElhgnBgDXkc=','2017-08-31 23:05:04.309000',0,'cormac74s@gmail.com','','','cormac74s@gmail.com',0,1,'2017-08-31 14:33:27.799000','cus_BJWnK0YvIKLRCN','2017-09-28 14:33:30.579000');
 COMMIT;

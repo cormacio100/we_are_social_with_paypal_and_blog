@@ -1,0 +1,24 @@
+.row.comment{
+    border-bottom: 1px solid darkgray;
+    border-top: 1px solid darkgray;
+    padding: 1em;
+}
+
+.fa-pencil-square-o,
+fa-trash-o{
+    padding:1em;
+}
+
+.comment-content{
+    margin-top:1em;
+    margin-bottom:2em;
+}
+
+time{
+    font-weight: bold;
+}
+
+.comment-profile p{
+    margin:1em;
+    color: #0077aa;
+}
