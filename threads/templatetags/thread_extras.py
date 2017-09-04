@@ -19,7 +19,7 @@ def get_total_subject_posts(subject):
     return total_posts
 
 
-#   uses arrow to return a simple ‘humanized’ version of the time,
+#   uses arrow to return a simple humanized version of the time,
 #   since the supplied datetime objects time occurred
 @register.filter
 def started_time(created_at):
@@ -36,5 +36,17 @@ def last_posted_user_name(thread):
     #   return the username of the most recent post
     return posts[posts.count()-1].user.username
 
+
+#   Template Tag which calculates a percentage value for a POLL
+@register.filter
+def vote_percentage(subject):
+    count = subject .votes.count()
+
+    if count ==  0:
+        return 0
+
+    total_votes = subject.poll.votes.count()
+
+    return (100/total_votes) * count
 
 
