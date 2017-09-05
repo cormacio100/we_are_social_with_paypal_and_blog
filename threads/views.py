@@ -34,7 +34,7 @@ def new_thread(request,subject_id):
         thread_form = ThreadForm(request.POST)
         post_form = PostForm(request.POST)
         poll_form = PollForm(request.POST)
-        poll_subject_formset = PollSubjectFormset(request.POST)
+        poll_subject_formset = PollSubjectForm(request.POST)
         
         #   When calling the is_valid, the formset will validate all your forms 
         #   in one go, so you can effectively treat them like they are one form

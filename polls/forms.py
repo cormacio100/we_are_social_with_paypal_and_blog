@@ -13,5 +13,14 @@ class PollForm(forms.ModelForm):
 class PollSubjectForm(forms.ModelForm):
 	name = forms.CharField(label="Poll subject name", required=True)
 
+	#	We override the class __init__ so that the empty_permitted validation option is set to False
+	#	Formsets by default allow empty fields, but we do not want that in our case.
 	def __init__(self,*args, **kwargs):
-		super(PollSubjectForm,self).__init__
+		super(PollSubjectForm,self).__init__(*args,**kwargs)
+		self.empty_permitted = False
+
+	class Meta:
+		model = PollSubject
+		fields = ['name']
+
+
