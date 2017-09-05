@@ -7,10 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.template.context_processors import csrf
 from django.shortcuts import render
-from .models import Subject, Post, Thread
+from threads.models import Subject, Post, Thread
 from .forms import ThreadForm, PostForm
 from django.forms import formset_factory
-from polls.forms import PollSubjectForm, PollForm
+from polls.forms import PollSubjectForm, PollForm, PollSubject
 
 
 def forum(request):
@@ -34,7 +34,7 @@ def new_thread(request,subject_id):
         thread_form = ThreadForm(request.POST)
         post_form = PostForm(request.POST)
         poll_form = PollForm(request.POST)
-        poll_subject_formset = poll_subject_formset(request.POST)
+        poll_subject_formset = PollSubjectFormset(request.POST)
         
         #   When calling the is_valid, the formset will validate all your forms 
         #   in one go, so you can effectively treat them like they are one form
@@ -168,3 +168,22 @@ def delete_post(request, thread_id, post_id):
     return redirect(reverse('thread',args={thread_id}))
 
 
+@login_required
+def thread_vote(request, thread_id, subject_id):
+   thread = Thread.objects.get(id=thread_id)
+ 
+   subject = thread.poll.votes.filter(user=request.user)
+ 
+   #   if user has already voted then an error message will display 
+   if subject:
+       messages.error(request, "You already voted on this! ...You are not trying to cheat are you?")
+       return redirect(reverse('thread', args={thread_id}))
+ 
+   subject = PollSubject.objects.get(id=subject_id)
+    
+   #   save the vote with the user who cast it  
+   subject.votes.create(poll=subject.poll, user=request.user)
+ 
+   messages.success(request, "We've registered your vote!")
+ 
+   return redirect(reverse('thread', args={thread_id}))

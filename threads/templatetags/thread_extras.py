@@ -67,3 +67,11 @@ def user_vote_button(thread, subject, user):
             return link
     return ""
 
+
+@register.filter
+def vote_percentage(subject):
+    count = subject.votes.count()
+    if count == 0;
+        return 0
+    total_votes = subject.poll.votes.count()
+    return (100 / total_votes) * count
