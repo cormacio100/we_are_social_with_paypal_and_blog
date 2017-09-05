@@ -10,7 +10,7 @@ class Poll(models.Model):
 
     #	make available in admin
     def __unicode__(self):
-    	return self.name
+    	return self.question
 
 #	A Poll Subject model to store what options are available to be voted on in our poll
 class PollSubject(models.Model):

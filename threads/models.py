@@ -57,6 +57,9 @@ class Thread(models.Model):
     #   record when the item was posted
     created_at = models.DateTimeField(default=timezone.now) #
 
+    def __unicode__(self):
+        return self.name
+
 
 #   One Thread has multiple Posts
 class Post(models.Model):
@@ -65,3 +68,6 @@ class Post(models.Model):
     #   link to user who created the post
     user = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='posts')
     created_at = models.DateTimeField(default=timezone.now)
+
+    def __unicode__(self):
+        return self.comment
