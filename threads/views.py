@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.template.context_processors import csrf
 from django.shortcuts import render
-from threads.models import Subject, Post, Thread
+from .models import Subject, Post, Thread
 from .forms import ThreadForm, PostForm
 from django.forms import formset_factory
 from polls.forms import PollSubjectForm, PollForm
@@ -156,6 +156,7 @@ def edit_post(request, thread_id, post_id):
 
     return render(request, 'forum/post_form.html', args)
 
+
 @login_required
 def delete_post(request, thread_id, post_id):
     post = get_object_or_404(Post, pk=post_id)
@@ -165,3 +166,5 @@ def delete_post(request, thread_id, post_id):
     messages.success(request,"Your post was deleted")
 
     return redirect(reverse('thread',args={thread_id}))
+
+
