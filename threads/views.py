@@ -23,22 +23,24 @@ def threads(request,subject_id):
 
 
 @login_required
-def new_thread(request,subject_id):
+def new_thread(request, subject_id):
     subject = get_object_or_404(Subject, pk=subject_id)
-    
     #   give the option of creating a poll when creating
     #   a new Thread
-    poll_subject_formset = formset_factory(PollSubjectForm, extra=3)
-    if request.method == 'POST':
-        #   create instances of the FORMS thread_form and post_form
+    poll_subject_formset_class = formset_factory(PollSubjectForm, extra=3)
+    if request.method == "POST":
+        #   create instances of the FORMS thread_form, post_form, poll_form and poll_subject_form
         thread_form = ThreadForm(request.POST)
         post_form = PostForm(request.POST)
         poll_form = PollForm(request.POST)
-        poll_subject_formset = PollSubjectForm(request.POST)
-        
+        poll_subject_formset = poll_subject_formset_class(request.POST)
+
         #   When calling the is_valid, the formset will validate all your forms 
         #   in one go, so you can effectively treat them like they are one form
-        if thread_form.is_valid() and post_form.is_valid() and poll_form.is_valid() and poll_subject_formset.is_valid():
+        if (thread_form.is_valid() and
+                post_form.is_valid() and
+                poll_form.is_valid() and
+                poll_subject_formset.is_valid()):
             #   Passing false to save method stops save to DB
             #   create a memory-only version of the THREAD model
             #   The reason is to assign the user from request.user
@@ -47,7 +49,7 @@ def new_thread(request,subject_id):
             thread.subject = subject
             thread.user = request.user
             thread.save()
-
+ 
             #   same for POST
             #   We create a memory-only version of the Post model
             #   We want to stop it being saved before we can assign
@@ -56,11 +58,11 @@ def new_thread(request,subject_id):
             post.user = request.user
             post.thread = thread
             post.save()
-
+ 
             #   save the POLL form after add the THREAD as a property
             poll = poll_form.save(False)
             poll.thread = thread
-            poll.save()           
+            poll.save()
 
 
             #   When it is time to pull out the values from each form, 
@@ -68,30 +70,32 @@ def new_thread(request,subject_id):
             for subject_form in poll_subject_formset:
                 subject = subject_form.save(False)
                 #   save the poll as a property of teh subject
-                subject.poll = poll 
+                subject.poll = poll
                 subject.save()
-
-            messages.success(request,"You have created a new thread!")
-
+ 
+            messages.success(request, "You have created a new thread!")
             #   Pass to a view thread view, which is expecting arguments
-            return redirect(reverse('thread',args={thread.pk}))
+            return redirect(reverse('thread', args={thread.pk}))
+ 
     else:
         #   empty forms
         thread_form = ThreadForm()
         post_form = PostForm(request.POST)
         poll_form = PollForm()
-        poll_subject_formset = poll_subject_formset()
-
+        poll_subject_formset = poll_subject_formset_class()
+ 
     args = {
-        'thread_form' : thread_form,
-        'post_form' : post_form,
-        'subject' : subject,
-        'poll_form' : poll_form,
-        'poll_subject_formset' : poll_subject_formset,
+        'thread_form': thread_form,
+        'post_form': post_form,
+        'subject': subject,
+        'poll_form': poll_form,
+        'poll_subject_formset': poll_subject_formset,
     }
+ 
     args.update(csrf(request))
+ 
+    return render(request, 'forum/thread_form.html', args)
 
-    return render(request,'forum/thread_form.html',args)
 
 
 def thread(request, thread_id):
