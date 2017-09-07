@@ -5,8 +5,8 @@ from django.utils import timezone
 
 
 class AccountUserManager(UserManager):
-    def _create_user(self, username, email, password,
-                     is_staff, is_superuser, **extra_fields):
+    def _create_user(self, username, email, password,is_staff, is_superuser, **extra_fields):
+    
         """
         Creates and saves a User with the given username, email and password.
         """
@@ -20,6 +20,9 @@ class AccountUserManager(UserManager):
                           is_superuser=is_superuser,
                           date_joined=now, **extra_fields)
         user.set_password(password)
+        print('username is:')
+        print(user)
+
         user.save(using=self._db)
 
         return user

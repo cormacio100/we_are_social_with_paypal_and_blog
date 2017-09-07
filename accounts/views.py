@@ -39,6 +39,9 @@ def register(request):
                 user = auth.authenticate(email=request.POST.get('email'),
                                          password=request.POST.get('password1'))
 
+                print('View: user is:')
+                print(user)
+
                 if user:
                     auth.login(request, user)
                     messages.success(request, "You have successfully registered")

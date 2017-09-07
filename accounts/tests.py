@@ -7,7 +7,7 @@ class CustomerUserTest(TestCase):
 	def test_manager_create(self):
 
 		#	supply a set of data to _create_user that would 
-		#	cause the ‘if not email’ clause to succeed and fail, 
+		#	cause the if not email clause to succeed and fail, 
 		#	to ensure it works in both directions so to speak
 
 		user = User.objects._create_user(None,"test@test.com","password",False, False)
