@@ -1,0 +1,42 @@
+[
+{
+    "fields": {
+        "username": "cormac.liston@outlook.com",
+        "first_name": "",
+        "last_name": "",
+        "is_active": true,
+        "is_superuser": true,
+        "is_staff": true,
+        "last_login": "2017-08-31T22:51:45.062Z",
+        "subscription_end": "2017-08-31T14:11:29.414Z",
+        "groups": [],
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$20000$mvurxzavD8cv$L4PaiSwg4cGtLUKOWHVKxjhwXyRWc+TzStDDf6n3Wes=",
+        "stripe_id": "",
+        "email": "cormac.liston@outlook.com",
+        "date_joined": "2017-08-31T14:11:29.414Z"
+    },
+    "model": "accounts.user",
+    "pk": 1
+},
+{
+    "fields": {
+        "username": "cormac74s@gmail.com",
+        "first_name": "",
+        "last_name": "",
+        "is_active": true,
+        "is_superuser": false,
+        "is_staff": false,
+        "last_login": "2017-08-31T23:05:04.309Z",
+        "subscription_end": "2017-09-28T14:33:30.579Z",
+        "groups": [],
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$20000$A4sowmqnPEdN$bX/s7/aMj1dbK8/k2C4ZptSr/FZZavviElhgnBgDXkc=",
+        "stripe_id": "cus_BJWnK0YvIKLRCN",
+        "email": "cormac74s@gmail.com",
+        "date_joined": "2017-08-31T14:33:27.799Z"
+    },
+    "model": "accounts.user",
+    "pk": 2
+}
+]
