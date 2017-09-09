@@ -28,7 +28,13 @@ def register(request):
                 )
 
                 if customer:
+
+                    print('View: form is:')
+                    print(form)
                     user = form.save()  # save here to create the user and get its instance
+
+                    
+
 
                     # now we replace the card id with the actual user id for later
                     user.stripe_id = customer.id
@@ -42,8 +48,7 @@ def register(request):
                 user = auth.authenticate(email=request.POST.get('email'),
                                          password=request.POST.get('password1'))
 
-                print('View: user2 is:')
-                print(user)
+                
 
                 if user:
                     auth.login(request, user)
