@@ -33,13 +33,16 @@ def register(request):
                     # now we replace the card id with the actual user id for later
                     user.stripe_id = customer.id
                     user.subscription_end = arrow.now().replace(weeks=+4).datetime  # add 4 weeks from now
+                    
+                    print('View: user is:')
+                    print(user)
                     user.save()
 
                 # check we saved correctly and can login
                 user = auth.authenticate(email=request.POST.get('email'),
                                          password=request.POST.get('password1'))
 
-                print('View: user is:')
+                print('View: user2 is:')
                 print(user)
 
                 if user:
