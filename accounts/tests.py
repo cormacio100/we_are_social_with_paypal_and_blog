@@ -1,6 +1,8 @@
 from django.test import TestCase
 from .models import User
-#from unittest import TestCase
+from .forms import UserRegistrationForm
+from django import forms
+from django.conf import settings
 
 
 class CustomerUserTest(TestCase):
@@ -16,6 +18,46 @@ class CustomerUserTest(TestCase):
 
 		with self.assertRaises(ValueError):
 			user = User.objects._create_user(None, None, "password", False,False)
+
+
+	#	check the validation works for unfilld form fields
+	def test_registraion_form(self):
+		form = UserRegistrationForm({
+			'email': 'test@test.com',
+			'password1': 'letmein1',
+			'password2': 'letmein1',
+			'stripe_id': settings.STRIPE_SECRET,
+			'credit_card_number': 4242424242424242,
+			'cvv': 123,
+			'expiry_month': 1,
+			'expiry_year': 2033
+		})
+
+		#	check the form details are valid
+		self.assertTrue(form.is_valid())
+		#	with error mesage
+		self.assertRaisesMessage(forms.ValidationError,
+			"Please enter your email address",
+			form.full_clean())
+
+	#	test the 2 passwords are matching
+	def test_registraion_form_fails_with_passwords_that_dont_matxh(self):
+		form = UserRegistrationForm({
+			'email': 'test@test.com',
+			'password1': 'letmein1',
+			'password2': 'letmein3',
+			'stripe_id': settings.STRIPE_SECRET,
+			'credit_card_number': 4242424242424242,
+			'cvv': 123,
+			'expiry_month': 1,
+			'expiry_year': 2033
+		})		
+		self.assertFalse(form.is_valid())
+		self.assertRaisesMessages(forms.ValidationError,
+			"Passwords do not match",
+			form.full_clean())
+
+
 
 #	Class derived from test class
 #class SimpleTest(TestCase):
