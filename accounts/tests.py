@@ -36,12 +36,10 @@ class CustomerUserTest(TestCase):
 		#	check the form details are valid
 		self.assertTrue(form.is_valid())
 		#	with error mesage
-		self.assertRaisesMessage(forms.ValidationError,
-			"Please enter your email address",
-			form.full_clean())
+		self.assertRaisesMessage(forms.ValidationError,"Please enter your email address",form.full_clean())
 
 	#	test the 2 passwords are matching
-	def test_registraion_form_fails_with_passwords_that_dont_matxh(self):
+	def test_registration_form_fails_with_passwords_that_dont_matxh(self):
 		form = UserRegistrationForm({
 			'email': 'test@test.com',
 			'password1': 'letmein1',
@@ -53,9 +51,39 @@ class CustomerUserTest(TestCase):
 			'expiry_year': 2033
 		})		
 		self.assertFalse(form.is_valid())
-		self.assertRaisesMessages(forms.ValidationError,
-			"Passwords do not match",
-			form.full_clean())
+		#self.assertRaisesMessages(forms.ValidationError,"Passwords do not match",form.full_clean())
+
+
+	#	empty passowrd test
+	def test_registraion_form_empty_password(self):
+		form = UserRegistrationForm({
+			'email': 'test@test.com',
+			'password1': '',
+			'password2': '',
+			'stripe_id': settings.STRIPE_SECRET,
+			'credit_card_number': 4242424242424242,
+			'cvv': 123,
+			'expiry_month': 1,
+			'expiry_year': 2033
+			})
+
+		self.assertFalse(form.is_valid())
+
+
+	#	empty passowrd test
+	def test_registraion_form_different_passwords(self):
+		form = UserRegistrationForm({
+			'email': 'test@test.com',
+			'password1': 'letmein1',
+			'password2': '',
+			'stripe_id': settings.STRIPE_SECRET,
+			'credit_card_number': 4242424242424242,
+			'cvv': 123,
+			'expiry_month': 1,
+			'expiry_year': 2033
+			})
+
+		self.assertFalse(form.is_valid())
 
 
 
