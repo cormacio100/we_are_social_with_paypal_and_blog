@@ -18,23 +18,29 @@ stripe.api_key = settings.STRIPE_SECRET
 
 def register(request):
     if request.method == 'POST':
+
+        print('form POSTED is:')
+        print(request.POST.get('email', None))
+
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             try:
+
                 customer = stripe.Customer.create(
                         email=form.cleaned_data['email'],
                         card=form.cleaned_data['stripe_id'],  # this is currently the card token/id
                         plan='REG_MONTHLY',
                 )
 
+                #print('customer DICTIONARY:')
+                #for keys,values in customer.items():
+                #    print(keys, values)
+
+
                 if customer:
 
-                    print('View: form is:')
-                    print(form)
+                    print('customer is valid')
                     user = form.save()  # save here to create the user and get its instance
-
-                    
-
 
                     # now we replace the card id with the actual user id for later
                     user.stripe_id = customer.id

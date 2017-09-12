@@ -44,16 +44,33 @@ class UserRegistrationForm(UserCreationForm):
  
     def clean_email(self):
         email = self.cleaned_data.get('email')
+
+        print('cleaned email is ')
+        print(email)
+
  
         if not email:
             message = "Please enter your email address"
             raise forms.ValidationError(message)
  
     def save(self, commit=True):
+        #   send to parent class to but don't save to DB yet
         instance = super(UserRegistrationForm, self).save(commit=False)
  
+        
+
+
         # automatically set to email address to create a unique identifier
         instance.username = instance.email
+
+        print('instance.email is ')
+        print(instance.email)
+        
+        print('********************:')
+        print('********************:')
+        print('instance DICTIONARY:')
+        for keys,values in instance.items():
+            print(keys, values)
  
         if commit:
             instance.save()
