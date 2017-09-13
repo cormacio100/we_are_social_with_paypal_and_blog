@@ -6,7 +6,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #	SECURITY WARNING: Enter your own SECRET_KEY here
 SECRET_KEY = '<SECRET_KEY>'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 SITE_ID = 2
 
 #	Application definition
