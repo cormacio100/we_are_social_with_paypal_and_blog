@@ -4,11 +4,7 @@ import dj_database_url
 DEBUG = False
 
 DATABASES = {
-	#'default': {
-	#	'ENGINE': 'django.db.backends.sqlite3',
-	#	'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
-	#}
-	'default': dj_database_url.config('CLEARDB_DATABASE_URL')
+   'default': dj_database_url.config('CLEARDB_DATABASE_URL')
 }
 
 # Stripe environment variables
