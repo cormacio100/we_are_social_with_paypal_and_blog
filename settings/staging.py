@@ -16,8 +16,9 @@ STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE', 'pk_test_nbWefqblVg8HnYsFmp
 STRIPE_SECRET = os.getenv('STRIPE_SECRET', 'sk_test_N35jP51CRqW4FKBMa8MAL1A4')
 
 # Paypal environment variables
+SITE_HOST = 'code-institute-we-are-social.herokuapp.com'
+ALLOWED_HOSTS.append(SITE_HOST)
 SITE_URL = 'https://code-institute-we-are-social.herokuapp.com/'
-ALLOWED_HOSTS += 'http://code-institute-we-are-social.herokuapp.com/'
 PAYPAL_NOTIFY_URL = 'code-institute-we-are-social.herokuapp.com'	#	your heroku app URL
 PAYPAL_RECEIVER_EMAIL = 'cormac.music@gmail.com'	#	your Paypal merchant email
 
